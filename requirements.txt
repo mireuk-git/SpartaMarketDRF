@@ -6,6 +6,8 @@ decorator==5.1.1
 distlib==0.3.9
 Django==4.2
 django-extensions==3.2.3
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
 executing==2.1.0
 filelock==3.16.1
 ipython==8.31.0
@@ -19,6 +21,7 @@ platformdirs==4.3.6
 prompt_toolkit==3.0.48
 pure_eval==0.2.3
 Pygments==2.18.0
+PyJWT==2.10.1
 setuptools==75.6.0
 sqlparse==0.5.3
 stack-data==0.6.3
