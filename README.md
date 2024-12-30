@@ -72,13 +72,23 @@ Item(products) - 상품 관련된 기능을 다루는 개체, 실제 이름은 a
 <details>
 <summary> views </summary>
 
-- login - POST request를 받아 로그인, 그외의 requst method엔 유저를 로그인 페이지로 이동
+- signup - POST request를 받아 새 계정 생성
+201: 정상적으로 새 계정 생성됨
+400: 잘못된 요청
+- login - POST request를 받아 로그인
+200: 로그인 성공
+400: 잘못된 요청, 이메일 또는 비밀번호가 올바르지 않음
 - logout - POST request를 받아 로그아웃
-- signup - POST request를 받아 auth_user에 새 계정 생성, 그외엔 유저를 회원가입 페이지로 이동
+400: 로그아웃 실패
 - delete - POST request를 받아 계정을 auth_user에서 삭제
-- update - POST request를 받아 유저 프로필 정보 변경 페이지, GET request를 받아 프로필 정보 변경 페이지로 이동 
-- mypage - 프로필 페이지로 이동
-- change_password - POST request를 받아 비밀번호 변경, 그외엔 비밀번호 변경 페이지로 이동
+- profile 
+  - GET: 프로필 페이지로 이동
+    - 200: 성공적으로 프로필 페이지 데이터를 얻어옴
+  - PUT,PATCH: 회원정보 수정
+    - 200: 성공적으로 회원정보 수정
+- follow: 팔로우 기능
+  - 200: 성공적으로 팔로우/팔로우 해제
+  - 400: 자기자신을 팔로우 할 경우의 오류 메시지
 
 </details>
 
@@ -88,15 +98,26 @@ Item(products) - 상품 관련된 기능을 다루는 개체, 실제 이름은 a
 <details>
 <summary> views </summary>
 
-- articles - 유저를 물건 목록 페이지로 이동, 각 게시글은 articles_article에 저장되어 있다. 
-- new - 새 게시글 작성 페이지로 이동, 로그인이 되어있지 않다면 로그인 페이지로 이동
-- create - POST request를 받아 new에서 작성한 글을 articles_article 테이블에 추가, 해당 글 디테일 페이지로 리다이렉트
-POST request가 아닐 경우 새 글 생성 페이지로 리다이렉트
-- article_detail - 게시글의 디테일 페이지로 이동
-- delete - POST request를 받아 게시글을 articles_article에서 삭제
-- edit - 게시글 편집, 로그인이 안되어 있다면 로그인 페이지로 이동
-- update - edit에서 편집된 글을 articles_article에 등록, 해당 글 디테일 페이지로 리다이렉트, 로그인이 안되어 있다면 로그인 페이지로 이동 
-- toggle_like - 자신의 찜 목록에 추가 / 삭제, 로그인 필요
+- ArticleListCreate.get - 게시글 목록 조회 
+- post - 게시글 생성
+  - 201: 성공적으로 새 게시글 생성됨
+  - 400: 새 게시글 생성 오류
+
+- get_object - 게시글 반환, ArticleDetail.get의 부속품
+  - 404: 게시글이 존재하지 않음
+- ArticleDetail.get - 게시글 상세 조회, 조회수 계산
+
+- CommentListCreate.get-article - 게시글 반환, CommentListCreate 클래스의 메서드의 부속품
+  - 404: 게시글이 존재하지 않음
+- CommentListCreate.get - 댓글 목록 조회
+- CommentListCreate.post - 새 댓글 생성
+  - 201: 댓글 성공적으로 생성
+  - 400: 댓글 생성 실패
+
+- CommentLike.get_article - 게시글 반환, CommentLike.post의 부속품
+- CommentLike.get_comment - 댓글 반환, CommentLike.post의 부속품품
+- CommentLike.post - 댓글의 좋아요 토글 기능
+  - 200: 성공적으로 처리 완료
 
 </details>
 
